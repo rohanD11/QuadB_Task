@@ -1,6 +1,7 @@
 const connectToMongo = require("./db");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const port = 8000;
@@ -13,7 +14,7 @@ app.use("/api", require("./routes/getData.js"));
 
 const start = async () => {
   try {
-     await connectToMongo();
+    await connectToMongo(process.env.mongoURI);
     app.listen(port, () => {
       console.log(`Example app listening at http://localhost:${port}`);
     });
@@ -23,5 +24,3 @@ const start = async () => {
 };
 
 start();
-
-
